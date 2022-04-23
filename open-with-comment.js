@@ -5,6 +5,9 @@
 
 // import openEditor from "open-editor";
 const fs = require("fs");
+
+const { parse, stringify, assign } = require("comment-json");
+
 const packageJson = JSON.parse(fs.readFileSync("./package.json"));
 const packageJsonComments = JSON.parse(
   fs.readFileSync("./package.json.comments")
@@ -58,16 +61,27 @@ const mix = function (
         console.log(`packageJsonComments[${key}] is String`);
         mixed = concatIndent(mixed, `// ${packageJsonComments[key]}`, indent);
       }
-      mixed = concatIndent(mixed, `"${key}": "${packageJson[key]}"`, indent);
+      mixed = concatIndent(
+        mixed,
+        `"${key}": ${JSON.stringify(packageJson[key])},`,
+        indent
+      );
     }
     console.log(`mixed (indent: ${indent}): `, mixed);
   }
   return mixed;
 };
 
-const mixed = mix(packageJson, packageJsonComments, "{", 2) + "\n}";
-console.log("mixed result:");
-console.log(mixed);
+const { inspect } = require("util");
+const basicJson = parse(fs.readFileSync("sample-with-comments.json", "utf-8"));
+console.log("basicJson", JSON.stringify(basicJson, null, 2));
+console.log(inspect(basicJson, { showHidden: true }));
+
+// const mixed = mix(packageJson, packageJsonComments, "{", 2) + "\n}";
+// console.log("mixed result:");
+// console.log(mixed);
+// fs.writeFileSync("package.mixed.json", mixed);
+
 // openEditor([
 //   {
 //     file: "readme.md",

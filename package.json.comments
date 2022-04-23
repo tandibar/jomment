@@ -1,5 +1,74 @@
 {
+  "###SYM###-Symbol(before:name)": [
+    {
+      "type": "BlockComment",
+      "value": " perhaps wee need a better name ",
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 2
+        },
+        "end": {
+          "line": 2,
+          "column": 38
+        }
+      },
+      "inline": false
+    }
+  ],
   "scripts": {
-    "preinstall": "magic"
+    "###SYM###-Symbol(before:preinstall)": [
+      {
+        "type": "LineComment",
+        "value": " magic",
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 4
+          },
+          "end": {
+            "line": 5,
+            "column": 12
+          }
+        },
+        "inline": false
+      }
+    ]
+  },
+  "dependencies": {
+    "###SYM###-Symbol(before:inquirer)": [
+      {
+        "type": "LineComment",
+        "value": " we really need to update this",
+        "loc": {
+          "start": {
+            "line": 11,
+            "column": 4
+          },
+          "end": {
+            "line": 11,
+            "column": 36
+          }
+        },
+        "inline": false
+      }
+    ],
+    "###SYM###-Symbol(after:json-diff)": [
+      {
+        "type": "LineComment",
+        "value": " throw away",
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 27
+          },
+          "end": {
+            "line": 13,
+            "column": 40
+          }
+        },
+        "inline": true
+      }
+    ]
   }
 }
