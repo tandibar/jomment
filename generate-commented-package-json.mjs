@@ -1,7 +1,7 @@
-const fs = require("fs");
-
-const { parse, stringify, assign } = require("comment-json");
-const { inspect } = require("util");
+import fs from "fs";
+import openEditor from "open-editor";
+import { parse, stringify, assign } from "comment-json";
+import { inspect } from "util";
 
 // const packageJson = parse(fs.readFileSync("./package.json", "utf-8"));
 const packageJsonExtractedComments = JSON.parse(
@@ -64,4 +64,18 @@ const commentedPackageJson = createSymbols(
 // const commentedPackageJson = assign(packageJson, onlyComments);
 // const commentedPackageJson = merge(packageJson, onlyComments);
 
-console.log("packageJson", stringify(packageJson, null, 2));
+// console.log("packageJson", stringify(packageJson, null, 2));
+
+const jsoncFileName = "package.jomment.tmp.jsonc";
+
+fs.writeFileSync(jsoncFileName, stringify(packageJson, null, 2));
+
+const subProcess = openEditor([
+  {
+    file: jsoncFileName,
+  },
+]);
+
+subProcess.on("exit", () => {
+  console.log("Hello World");
+});
