@@ -1,5 +1,5 @@
 import fs from "fs";
-import openEditor from "open-editor";
+import openEditor from "./open-editor-mod.mjs";
 import { parse, stringify, assign } from "comment-json";
 import { inspect } from "util";
 
@@ -7,21 +7,6 @@ import { inspect } from "util";
 const packageJsonExtractedComments = JSON.parse(
   fs.readFileSync("./package.json.comments", "utf-8")
 );
-
-// https://gist.github.com/ahtcx/0cd94e62691f539160b32ecda18af3d6?permalink_comment_id=3889214#gistcomment-3889214
-function merge(source, target) {
-  for (const [key, val] of Object.entries(source)) {
-    if (val !== null && typeof val === `object`) {
-      if (target[key] === undefined) {
-        target[key] = new val.__proto__.constructor();
-      }
-      merge(val, target[key]);
-    } else {
-      target[key] = val;
-    }
-  }
-  return target; // we're replacing in-situ, so this is more for chaining than anything else
-}
 
 const SYM_PREFIX = "###SYM###-";
 
@@ -70,12 +55,10 @@ const jsoncFileName = "package.jomment.tmp.jsonc";
 
 fs.writeFileSync(jsoncFileName, stringify(packageJson, null, 2));
 
-const subProcess = openEditor([
+openEditor([
   {
     file: jsoncFileName,
   },
-]);
-
-subProcess.on("exit", () => {
-  console.log("Hello World");
+], { wait: true }).then(() => {
+  console.log("now we can reparse")
 });
