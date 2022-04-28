@@ -7,3 +7,6 @@ Todos:
 - https://github.com/sindresorhus/env-editor/pull/13
 - create PR for open-edito with codium support
 - create PR for --wait
+
+
+https://github.com/npm/npm/issues/4482

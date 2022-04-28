@@ -22,7 +22,6 @@ export function getEditorInfo(files, options = {}) {
 		const parsed = parseLineColumnPath(file);
 
 		if (['sublime', 'atom', 'vscode', 'vscodium'].includes(editor.id)) {
-			console.log('found sublime atom vscode, options', options);
 			editorArguments.push(stringifyLineColumnPath(parsed));
 			if (options.wait) {
 				editorArguments.push("--wait");
@@ -32,6 +31,9 @@ export function getEditorInfo(files, options = {}) {
 
 		if (['webstorm', 'intellij'].includes(editor.id)) {
 			editorArguments.push(stringifyLineColumnPath(parsed, {column: false}));
+			if (options.wait) {
+				editorArguments.push("--wait");
+			}
 			continue;
 		}
 
@@ -39,6 +41,9 @@ export function getEditorInfo(files, options = {}) {
 			editorArguments.push('--line', stringifyLineColumnPath(parsed, {
 				file: false,
 			}), parsed.file);
+			if (options.wait) {
+				editorArguments.push("-w");
+			}
 			continue;
 		}
 
@@ -77,13 +82,13 @@ export default function openEditor(files, options) {
 		}
 	});
 
-	if (result.isTerminalEditor) {
-		subprocess.on('exit', process.exit);
+	if (options.wait) {
+		return new Promise((resolve, reject) => {
+			subprocess.on('exit', resolve);
+		})
 	} else {
-		if (options.wait) {
-			return new Promise((resolve, reject) => {
-				subprocess.on('exit', resolve);
-			})
+		if (result.isTerminalEditor) {
+			subprocess.on('exit', process.exit);
 		} else {
 			subprocess.unref();
 		}

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "preinstall": "node ./preinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,6 +15,7 @@
     "chalk": "^5.0.1",
     "commander": "^9.2.0",
     "comment-json": "^4.2.2",
+    "debug": "^4.3.4",
     "inquirer": "^8.2.2",
     "json-diff": "^0.7.4",
     "json5": "^2.2.1",
