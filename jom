@@ -41,7 +41,10 @@ program
       process.exitCode = -23;
       return;
     }
-    console.log(`initializing a basic .jom file: ${jomFileName}`);
+    console.log(`initializing a basic .jom file '${jomFileName}' which holds the comments for '${file}'`);
+    console.log(`now you can run`);
+    console.log(`  $> jom edit ${jomFileName}`);
+    console.log(`to start adding comments`);
 
     const preamble = `${generatePreamble(file)}{}`;
     writeFileSync(jomFileName, preamble);
@@ -52,6 +55,7 @@ program
   .description("edit a json file with its corresponding comments file")
   .action(async (jomFile) => {
     jomFile = jomFile || DEFAULT_JOM_FILE;
+
     const jomContent = readFileSync(jomFile, { encoding: "utf-8" });
     const fileRefMatch = jomContent.match(/^\/\/\s*fileRef\:\s*(.*)\s*$/m);
     const jsonFilePath = fileRefMatch[1];
