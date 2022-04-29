@@ -2,8 +2,8 @@
 ":" //# comment; exec /usr/bin/env node --input-type=module - "$@" < "$0"
 
 import { Command } from "commander";
-import { existsSync, readFileSync, writeFileSync } from "fs";
-import { basename, extname } from "path";
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from "fs";
+import { basename, dirname, extname, join } from "path";
 
 import openEditor from "./src/open-editor-mod.mjs";
 import createJsonc from "./src/create-jsonc.js";
@@ -51,17 +51,16 @@ program
   });
 
 program
-  .command("edit [jomFile]")
+  .command("edit [jsonFile]")
   .description("edit a json file with its corresponding comments file")
-  .action(async (jomFile) => {
-    jomFile = jomFile || DEFAULT_JOM_FILE;
-
-    const jomContent = readFileSync(jomFile, { encoding: "utf-8" });
-    const fileRefMatch = jomContent.match(/^\/\/\s*fileRef\:\s*(.*)\s*$/m);
-    const jsonFilePath = fileRefMatch[1];
-    const jsonc = await createJsonc(jsonFilePath, jomFile);
-
-    const jsonBasename = basename(jsonFilePath, extname(jsonFilePath));
+  .action(async (jsonFile) => {
+    if(!jsonFile) {
+      jsonFile = DEFAULT_FILE
+    }
+    
+    const jsonBasename = basename(jsonFile, extname(jsonFile));
+    const jomFile = join(dirname(jsonFile), `${jsonBasename}.jom`);
+    const jsonc = await createJsonc(jsonFile, jomFile);
     const jsoncFileName = `${jsonBasename}.jom.tmp.jsonc`;
 
     writeFileSync(jsoncFileName, jsonc);
@@ -75,7 +74,8 @@ program
       { wait: true }
     );
 
-    createJom(jsonFilePath, jomFile, jsoncFileName);
+    createJom(jsonFile, jomFile, jsoncFileName);
+    unlinkSync(jsoncFileName)
   });
 
 program
