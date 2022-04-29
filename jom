@@ -1,13 +1,15 @@
-#!/usr/bin/env sh
-":"; //# comment; exec /usr/bin/env node --input-type=module - "$@" < "$0"
+#!/usr/bin/env bash
+":" //# comment; exec /usr/bin/env node --input-type=module - "$@" < "$0"
 
 import { Command } from "commander";
-import { readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { basename, extname } from "path";
+
 import openEditor from "./src/open-editor-mod.mjs";
 import createJsonc from "./src/create-jsonc.js";
 import createJom from "./src/create-jom.js";
 import generatePreamble from "./src/generate-preamble.js";
+import chalk from "chalk";
 
 const selfInfo = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
@@ -26,11 +28,19 @@ program
 program
   .command("init [file]")
   .description("edit a json file with its corresponding comments file")
-  .action((file) => {
+  .option("-f, --force", "create file even if already exists", false)
+  .action((file, options) => {
     file = file || DEFAULT_FILE;
     const jsonBasename = basename(file, extname(file));
     const jomFileName = `${jsonBasename}.jom`;
-
+    if (existsSync(jomFileName) && !options.force) {
+      console.error(chalk.red(`Error: file '${jomFileName}' already exists`));
+      console.error(
+        `if you want to recreate it with loosing all current comments, use --force`
+      );
+      process.exitCode = -23;
+      return;
+    }
     console.log(`initializing a basic .jom file: ${jomFileName}`);
 
     const preamble = `${generatePreamble(file)}{}`;
