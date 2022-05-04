@@ -1,5 +1,4 @@
 import fs from "fs";
-import { basename, extname } from "path";
 import { parse, stringify } from "comment-json";
 import debug from "debug";
 
@@ -31,10 +30,13 @@ function createSymbols(jsonWithEncodedSymbols, packageJson) {
 }
 
 export default function (jsonFilePath, jomFilePath) {
-  const jomComments = JSON.parse(
-    // skip first 5 lines (preamble)
-    fs.readFileSync(jomFilePath, "utf-8").split("\n").slice(5).join("\n")
-  );
+  let jomComments = {};
+  if (fs.existsSync(jomFilePath)) {
+    jomComments = JSON.parse(
+      // skip preamble
+      fs.readFileSync(jomFilePath, "utf-8").split("\n").slice(6).join("\n")
+    );
+  }
 
   const jsonWithoutComments = parse(fs.readFileSync(jsonFilePath, "utf-8"));
   const jsonWithComments = jsonWithoutComments;

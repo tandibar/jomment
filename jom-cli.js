@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-":" //# comment; exec /usr/bin/env node --input-type=module - "$@" < "$0"
-
 import { Command } from "commander";
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from "fs";
 import { basename, dirname, extname, join } from "path";
@@ -41,7 +38,9 @@ program
       process.exitCode = -23;
       return;
     }
-    console.log(`initializing a basic .jom file '${jomFileName}' which holds the comments for '${file}'`);
+    console.log(
+      `initializing a basic .jom file '${jomFileName}' which holds the comments for '${file}'`
+    );
     console.log(`now you can run`);
     console.log(`  $> jom edit ${jomFileName}`);
     console.log(`to start adding comments`);
@@ -54,10 +53,10 @@ program
   .command("edit [jsonFile]")
   .description("edit a json file with its corresponding comments file")
   .action(async (jsonFile) => {
-    if(!jsonFile) {
-      jsonFile = DEFAULT_FILE
+    if (!jsonFile) {
+      jsonFile = DEFAULT_FILE;
     }
-    
+
     const jsonBasename = basename(jsonFile, extname(jsonFile));
     const jomFile = join(dirname(jsonFile), `${jsonBasename}.jom`);
     const jsonc = await createJsonc(jsonFile, jomFile);
@@ -75,20 +74,21 @@ program
     );
 
     createJom(jsonFile, jomFile, jsoncFileName);
-    unlinkSync(jsoncFileName)
+    unlinkSync(jsoncFileName);
   });
 
 program
-  .command("cat [jomFile]")
+  .command("cat [jsonFile]")
   .description("print out the json file with comments")
-  .action(async (jomFile) => {
-    jomFile = jomFile || DEFAULT_JOM_FILE;
+  .action(async (jsonFile) => {
+    if (!jsonFile) {
+      jsonFile = DEFAULT_FILE;
+    }
 
-    const jomContent = readFileSync(jomFile, { encoding: "utf-8" });
-    const fileRefMatch = jomContent.match(/^\/\/\s*fileRef\:\s*(.*)\s*$/m);
-    const jsonFilePath = fileRefMatch[1];
-    const jsonc = await createJsonc(jsonFilePath, jomFile);
-
+    const jsonBasename = basename(jsonFile, extname(jsonFile));
+    const jomFile = join(dirname(jsonFile), `${jsonBasename}.jom`);
+    const jsonc = await createJsonc(jsonFile, jomFile);
+    
     console.log(jsonc);
   });
 
