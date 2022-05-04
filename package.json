@@ -10,7 +10,7 @@
     "syncAndInstall": "node ./preinstall.js && npm i"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.2.0",
