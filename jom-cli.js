@@ -1,3 +1,4 @@
+#!/bin/env node
 import { Command } from "commander";
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from "fs";
 import { basename, dirname, extname, join } from "path";
@@ -14,8 +15,7 @@ const selfInfo = JSON.parse(
 
 const program = new Command();
 
-const DEFAULT_FILE = "test-package.json";
-const DEFAULT_JOM_FILE = "test-package.jom";
+const DEFAULT_FILE = "package.json";
 
 program
   .name("jom")
@@ -24,7 +24,7 @@ program
 
 program
   .command("init [file]")
-  .description("edit a json file with its corresponding comments file")
+  .description(`init an empty jom file for a json file`)
   .option("-f, --force", "create file even if already exists", false)
   .action((file, options) => {
     file = file || DEFAULT_FILE;

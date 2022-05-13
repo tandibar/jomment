@@ -1,0 +1,65 @@
+// ---- start of jomment preamble v0.1.0 ----
+// These are the comments of package.json
+// Please do not edit manually!
+// Use
+//   $ jom edit package.json
+// ---- end of jomment preamble ----
+
+{
+  "bin": {
+    "###SYM###-Symbol(before:jom)": [
+      {
+        "type": "LineComment",
+        "value": " aber hier nicht, oder?",
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 4
+          },
+          "end": {
+            "line": 7,
+            "column": 29
+          }
+        },
+        "inline": false
+      }
+    ]
+  },
+  "scripts": {},
+  "dependencies": {
+    "###SYM###-Symbol(before:chalk)": [
+      {
+        "type": "LineComment",
+        "value": " warum hier nicht?",
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 4
+          },
+          "end": {
+            "line": 17,
+            "column": 24
+          }
+        },
+        "inline": false
+      }
+    ],
+    "###SYM###-Symbol(before:comment-json)": [
+      {
+        "type": "LineComment",
+        "value": " what the heck",
+        "loc": {
+          "start": {
+            "line": 20,
+            "column": 4
+          },
+          "end": {
+            "line": 20,
+            "column": 20
+          }
+        },
+        "inline": false
+      }
+    ]
+  }
+}

@@ -2,9 +2,9 @@
   "name": "jomment",
   "version": "0.1.0",
   "description": "undestructive json comments",
-  "main": "index.js",
+  "main": "jom-cli.js",
   "bin": {
-    "jom": "./jom.js"
+    "jom": "./jom-cli.js"
   },
   "type": "module",
   "scripts": {
@@ -17,7 +17,6 @@
     "commander": "^9.2.0",
     "comment-json": "^4.2.2",
     "debug": "^4.3.4",
-    "open-editor": "^4.0.0",
-    "xo": "^0.48.0"
+    "open-editor": "^4.0.0"
   }
 }
