@@ -2,6 +2,8 @@
   "name": "jomment",
   "version": "0.1.0",
   "description": "undestructive json comments",
+  "homepage": "https://github.com/tandibar/jomment",
+  "repository": "github:tandibar/jomment",
   "main": "jom-cli.js",
   "bin": {
     "jom": "./jom-cli.js"
