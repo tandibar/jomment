@@ -43,6 +43,23 @@
         },
         "inline": false
       }
+    ],
+    "###SYM###-Symbol(before:open-editor)": [
+      {
+        "type": "LineComment",
+        "value": " increment if https://github.com/sindresorhus/open-editor/pull/17 is merged",
+        "loc": {
+          "start": {
+            "line": 21,
+            "column": 4
+          },
+          "end": {
+            "line": 21,
+            "column": 81
+          }
+        },
+        "inline": false
+      }
     ]
   }
 }
