@@ -15,6 +15,7 @@
   "dependencies": {
     "commander": "^9.2.0",
     "comment-json": "^4.2.2",
-    "debug": "^4.3.4"
+    "debug": "^4.3.4",
+    "open-editor": "^4.0.0"
   }
 }
