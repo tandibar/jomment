@@ -10,7 +10,7 @@
     "###SYM###-Symbol(before:jom)": [
       {
         "type": "LineComment",
-        "value": " aber hier nicht, oder?",
+        "value": " this maps `jom` to the cli-script",
         "loc": {
           "start": {
             "line": 7,
@@ -18,7 +18,7 @@
           },
           "end": {
             "line": 7,
-            "column": 29
+            "column": 40
           }
         },
         "inline": false
@@ -27,35 +27,18 @@
   },
   "scripts": {},
   "dependencies": {
-    "###SYM###-Symbol(before:chalk)": [
-      {
-        "type": "LineComment",
-        "value": " warum hier nicht?",
-        "loc": {
-          "start": {
-            "line": 17,
-            "column": 4
-          },
-          "end": {
-            "line": 17,
-            "column": 24
-          }
-        },
-        "inline": false
-      }
-    ],
     "###SYM###-Symbol(before:comment-json)": [
       {
         "type": "LineComment",
-        "value": " what the heck",
+        "value": " thank u very much for this great library",
         "loc": {
           "start": {
-            "line": 20,
+            "line": 18,
             "column": 4
           },
           "end": {
-            "line": 20,
-            "column": 20
+            "line": 18,
+            "column": 47
           }
         },
         "inline": false

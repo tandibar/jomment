@@ -1,13 +1,11 @@
 #!/bin/env node
 import { Command } from "commander";
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from "fs";
+import { readFileSync, unlinkSync, writeFileSync } from "fs";
 import { basename, dirname, extname, join } from "path";
 
 import openEditor from "./src/open-editor-mod.mjs";
 import createJsonc from "./src/create-jsonc.js";
 import createJom from "./src/create-jom.js";
-import generatePreamble from "./src/generate-preamble.js";
-import chalk from "chalk";
 
 const selfInfo = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })

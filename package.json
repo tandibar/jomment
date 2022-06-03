@@ -13,10 +13,8 @@
   "author": "Andreas Bade",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^5.0.1",
     "commander": "^9.2.0",
     "comment-json": "^4.2.2",
-    "debug": "^4.3.4",
-    "open-editor": "^4.0.0"
+    "debug": "^4.3.4"
   }
 }
